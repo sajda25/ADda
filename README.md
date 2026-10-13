@@ -78,40 +78,6 @@ pnpm seed          # idempotent demo district seed (~40 memories)
 
 Verify seed: `GET /api/seed` and `GET /api/places`.
 
-## Current phase
-
-| Phase | Status |
-| --- | --- |
-| 1 Scaffold | ✅ |
-| 2 Data + seed | ✅ 10 places, 41+ memories, 12 relations, 4 epochs |
-| 3 Map + storybook | ✅ Leaflet map, discovery modes, story reader, qualified reads |
-| 4 Memory Echoes | ✅ Seeded relations + UI + `/api/relations` |
-| 5 Generative mural | ✅ Deterministic canvas engine + cause panel + Vitest |
-| 6 Publishing | ✅ Modal + `/api/memories/publish` (DB-only until chain wired) |
-| 7 Monad integration | ⏳ Contracts written; Foundry/Privy/wagmi not yet deployed or wired |
-| 8 Treasury | ⏳ Contract stub only |
-| 9 Demo polish | 🟡 `/demo` seed status + docs present |
-| 10 Deployment | ⏳ Not deployed |
-
-### Incomplete / honest gaps
-
-- No verified Monad Testnet transaction yet (Foundry CLI not installed on this machine; contract addresses empty).
-- Privy / wagmi wallet UX not wired.
-- Playwright e2e smoke tests not added.
-- Preservation funding UI not implemented (by design until chain is live).
-
-## Environment
-
-See [.env.example](./.env.example). Never put deployer private keys in `NEXT_PUBLIC_*` variables.
-
-## Product rules (non-negotiable)
-
-- No Memory Duels or winner-takes-all ranking
-- Funding never buys story visibility
-- Personal story content off-chain by default
-- No speculative token / NFT marketplace
-- Quiet and rarely-read stories remain accessible
-
 ## License
 
 Private / hackathon prototype — rights reserved by the authors.
