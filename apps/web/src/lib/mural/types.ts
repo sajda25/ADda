@@ -1,4 +1,4 @@
-import type { TemporalLayer } from "@memory-streets/shared";
+import type { TemporalLayer } from "@adda/shared";
 
 export type MuralMotifKind =
   | "tea"

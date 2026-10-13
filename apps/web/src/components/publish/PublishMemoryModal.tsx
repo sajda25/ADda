@@ -7,7 +7,7 @@ import {
   LAYER_LABELS,
   TEMPORAL_LAYERS,
   type TemporalLayer,
-} from "@memory-streets/shared";
+} from "@adda/shared";
 import { easeOut } from "@/components/motion/primitives";
 import {
   Bookworm,

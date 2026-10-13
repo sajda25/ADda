@@ -1,4 +1,4 @@
-import { MURAL_ENGINE_VERSION } from "@memory-streets/shared";
+import { MURAL_ENGINE_VERSION } from "@adda/shared";
 import { drawMotif, motifsFromTags } from "./motifs";
 import type { MuralCause, MuralInput, MuralRenderResult } from "./types";
 

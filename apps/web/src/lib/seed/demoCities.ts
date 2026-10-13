@@ -2,7 +2,7 @@
  * Extra demo cities beyond Kolkata — illustrative places + a few memories each.
  */
 
-import { DEMO_CITIES } from "@memory-streets/shared";
+import { DEMO_CITIES } from "@adda/shared";
 import type { SeedMemory, SeedPlace } from "@/lib/seed/demoNeighborhood";
 
 export type SeedNeighborhood = {

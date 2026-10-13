@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { MURAL_ENGINE_VERSION } from "@memory-streets/shared";
+import { MURAL_ENGINE_VERSION } from "@adda/shared";
 import { prisma } from "@/lib/db";
 import {
   analyzeMuralInput,
   defaultMuralInput,
 } from "@/lib/mural/engine";
-import type { TemporalLayer } from "@memory-streets/shared";
+import type { TemporalLayer } from "@adda/shared";
 
 export async function GET(request: NextRequest) {
   try {

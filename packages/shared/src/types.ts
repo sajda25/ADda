@@ -1,4 +1,4 @@
-/** Shared domain types for MEMORY STREETS */
+/** Shared domain types for ADda */
 
 export type TemporalLayer = "NOW" | "BEFORE_CHANGE" | "CHILDHOOD_CAMPUS";
 

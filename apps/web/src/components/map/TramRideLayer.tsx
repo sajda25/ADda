@@ -3,7 +3,7 @@
 import { useEffect, useMemo } from "react";
 import L from "leaflet";
 import { Marker, Polyline, useMap } from "react-leaflet";
-import type { PlaceSummary } from "@memory-streets/shared";
+import type { PlaceSummary } from "@adda/shared";
 import { lerpLatLng } from "@/lib/tramRoute";
 
 type Props = {

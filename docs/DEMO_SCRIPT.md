@@ -11,4 +11,4 @@
 7. **Mural (25s)** — On desktop, show the mural panel + cause explanation; switch epochs E1/E2.
 8. **Publish (25s)** — Contribute a short demo memory; confirm success only after the API responds.
 9. **Chain (optional)** — Only if contracts are deployed: show a real tx hash + explorer link. Never fabricate one.
-10. **Close** — “Social media tells the stories of people. MEMORY STREETS preserves the stories of places.”
+10. **Close** — “Social media tells the stories of people. ADda preserves the stories of places.”

@@ -1,14 +1,14 @@
-# MEMORY STREETS
+# ADda
 
 **Every place has more than one story.**
 
-MEMORY STREETS turns neighborhoods into living storybooks. People discover, share, and preserve place-based memories on an interactive map — without competing for visibility, and without a pay-to-promote feed.
+ADda turns neighborhoods into living storybooks. People discover, share, and preserve place-based memories on an interactive map — without competing for visibility, and without a pay-to-promote feed.
 
-This repository is an independent monorepo (`memory-streets`). It is not part of any other project.
+This repository is an independent monorepo (`adda`). It is not part of any other project.
 
 ## Why not Instagram?
 
-| Social media | MEMORY STREETS |
+| Social media | ADda |
 | --- | --- |
 | Centers profiles & followers | Centers **places** and their storybooks |
 | Feed of posts | Multiple experiences at the same spot |
@@ -27,7 +27,7 @@ This repository is an independent monorepo (`memory-streets`). It is not part of
 ## Repository layout
 
 ```
-memory-streets/
+adda/
   apps/web/          Next.js application
   packages/shared/   Shared types, constants, validators
   contracts/         Foundry / Solidity (Phase 7+)

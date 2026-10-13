@@ -4,7 +4,7 @@ import path from "node:path";
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
-  transpilePackages: ["@memory-streets/shared"],
+  transpilePackages: ["@adda/shared"],
   images: {
     remotePatterns: [
       {

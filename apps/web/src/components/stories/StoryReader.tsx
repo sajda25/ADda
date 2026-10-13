@@ -8,7 +8,7 @@ import {
   RELATION_LABELS,
   type RelationType,
   type TemporalLayer,
-} from "@memory-streets/shared";
+} from "@adda/shared";
 import { easeOut } from "@/components/motion/primitives";
 import { PageTurn } from "@/components/motion/PageTurn";
 import {

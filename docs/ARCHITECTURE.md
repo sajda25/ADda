@@ -1,8 +1,8 @@
-# Architecture — MEMORY STREETS
+# Architecture — ADda
 
 ## Overview
 
-MEMORY STREETS is a pnpm monorepo:
+ADda is a pnpm monorepo:
 
 | Path | Role |
 | --- | --- |

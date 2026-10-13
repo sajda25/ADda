@@ -1,4 +1,4 @@
-import type { PlaceSummary } from "@memory-streets/shared";
+import type { PlaceSummary } from "@adda/shared";
 
 function dist2(a: PlaceSummary, b: PlaceSummary): number {
   const dLat = a.approxLat - b.approxLat;

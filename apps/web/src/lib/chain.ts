@@ -7,7 +7,7 @@ import {
   MONAD_CHAIN_ID,
   MONAD_EXPLORER_DEFAULT,
   MONAD_RPC_DEFAULT,
-} from "@memory-streets/shared";
+} from "@adda/shared";
 
 export const monadChain = {
   id: Number(process.env.NEXT_PUBLIC_CHAIN_ID ?? MONAD_CHAIN_ID),

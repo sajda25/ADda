@@ -4,7 +4,7 @@ import {
   demoCityById,
   demoCityByName,
   validateCreatePlace,
-} from "@memory-streets/shared";
+} from "@adda/shared";
 import { prisma } from "@/lib/db";
 import { exteriorImageForPlace } from "@/lib/placeImages";
 

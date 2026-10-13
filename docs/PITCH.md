@@ -1,8 +1,8 @@
-# Pitch — MEMORY STREETS
+# Pitch — ADda
 
 **Every place has more than one story.**
 
-MEMORY STREETS turns neighborhoods into living storybooks. On an interactive map, each marker opens a Place Storybook: many memories attached to the same tea stall, bus shelter, school gate, or street corner.
+ADda turns neighborhoods into living storybooks. On an interactive map, each marker opens a Place Storybook: many memories attached to the same tea stall, bus shelter, school gate, or street corner.
 
 The seeded demo walks College Street and surrounding Kolkata corridors — coffee-house adda, tram crossings, Kumartuli clay lanes — as illustrative fiction.
 
@@ -14,4 +14,4 @@ Blockchain, when used, records content commitments and mural epochs on Monad Tes
 
 Closing line:
 
-> Social media tells the stories of people. MEMORY STREETS preserves the stories of places.
+> Social media tells the stories of people. ADda preserves the stories of places.

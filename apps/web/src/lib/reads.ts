@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-import { READ_DEDUP_HOURS } from "@memory-streets/shared";
+import { READ_DEDUP_HOURS } from "@adda/shared";
 import { prisma } from "@/lib/db";
 
 export function hashReaderKey(raw: string): string {

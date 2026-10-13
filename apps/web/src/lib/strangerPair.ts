@@ -1,4 +1,4 @@
-import type { MemorySummary } from "@memory-streets/shared";
+import type { MemorySummary } from "@adda/shared";
 
 export type StrangerPair = {
   left: MemorySummary;

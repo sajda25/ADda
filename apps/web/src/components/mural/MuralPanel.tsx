@@ -68,7 +68,7 @@ export function MuralPanel({ placeId }: Props) {
     const url = canvas.toDataURL("image/png");
     const a = document.createElement("a");
     a.href = url;
-    a.download = `memory-streets-mural-${placeId ?? "place"}.png`;
+    a.download = `adda-mural-${placeId ?? "place"}.png`;
     a.click();
   };
 

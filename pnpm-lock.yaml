@@ -10,7 +10,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@memory-streets/shared':
+      '@adda/shared':
         specifier: workspace:*
         version: link:../../packages/shared
       '@prisma/client':

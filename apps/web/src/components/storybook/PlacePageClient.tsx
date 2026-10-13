@@ -6,7 +6,7 @@ import {
   LAYER_LABELS,
   type MemorySummary,
   type PlaceSummary,
-} from "@memory-streets/shared";
+} from "@adda/shared";
 import { EmptyChair } from "@/components/storybook/EmptyChair";
 import { TwoStrangersTable } from "@/components/storybook/TwoStrangersTable";
 

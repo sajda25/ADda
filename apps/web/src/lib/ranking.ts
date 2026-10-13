@@ -1,4 +1,4 @@
-import type { DiscoveryMode } from "@memory-streets/shared";
+import type { DiscoveryMode } from "@adda/shared";
 
 export type RankableMemory = {
   id: string;

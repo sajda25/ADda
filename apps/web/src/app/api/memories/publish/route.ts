@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { validatePublishMemory } from "@memory-streets/shared";
+import { validatePublishMemory } from "@adda/shared";
 import { prisma } from "@/lib/db";
 
 const RATE_WINDOW_MS = 60_000;

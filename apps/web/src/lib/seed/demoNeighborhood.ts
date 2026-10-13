@@ -3,11 +3,11 @@
  * All stories are fictional and illustrative — not attributed to real people.
  */
 
-import type { RelationType, TemporalLayer } from "@memory-streets/shared";
+import type { RelationType, TemporalLayer } from "@adda/shared";
 import {
   DEMO_DISTRICT_ID,
   DEMO_DISTRICT_LABEL,
-} from "@memory-streets/shared";
+} from "@adda/shared";
 
 export const SEED_VERSION = "india-cities-v1";
 

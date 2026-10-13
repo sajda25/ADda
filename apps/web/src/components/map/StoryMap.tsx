@@ -9,7 +9,7 @@ import {
   useMap,
   ZoomControl,
 } from "react-leaflet";
-import type { PlaceSummary } from "@memory-streets/shared";
+import type { PlaceSummary } from "@adda/shared";
 import {
   ARCHIVAL_TILE_ATTRIBUTION,
   ARCHIVAL_TILE_URL,

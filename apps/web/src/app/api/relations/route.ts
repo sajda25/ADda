@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isRelationType } from "@memory-streets/shared";
+import { isRelationType } from "@adda/shared";
 import { prisma } from "@/lib/db";
 
 export async function GET(request: NextRequest) {

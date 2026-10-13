@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { LAYER_LABELS, type MemorySummary } from "@memory-streets/shared";
+import { LAYER_LABELS, type MemorySummary } from "@adda/shared";
 import { CoffeeRing } from "@/components/demo/ScrapbookBits";
 import { rankStrangerPairs } from "@/lib/strangerPair";
 import { easeOut } from "@/components/motion/primitives";

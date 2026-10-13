@@ -1,7 +1,7 @@
 "use client";
 
 import type { MuralCause } from "@/lib/mural/types";
-import { LAYER_LABELS } from "@memory-streets/shared";
+import { LAYER_LABELS } from "@adda/shared";
 
 type Props = {
   cause: MuralCause | null;

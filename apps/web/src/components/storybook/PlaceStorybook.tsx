@@ -9,7 +9,7 @@ import {
   type MemorySummary,
   type PlaceSummary,
   type TemporalLayer,
-} from "@memory-streets/shared";
+} from "@adda/shared";
 import { easeOut } from "@/components/motion/primitives";
 import { EmptyChair } from "@/components/storybook/EmptyChair";
 import { TwoStrangersTable } from "@/components/storybook/TwoStrangersTable";

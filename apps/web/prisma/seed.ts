@@ -31,7 +31,7 @@ async function main() {
   const allMemories = [...seedMemories, ...seedCityMemories];
   const neighborhoodIds = seedNeighborhoods.map((n) => n.id);
 
-  console.log(`Seeding MEMORY STREETS demo (${SEED_VERSION})…`);
+  console.log(`Seeding ADda demo (${SEED_VERSION})…`);
   console.log(
     `Cities: ${seedNeighborhoods.length}, Places: ${seedPlaces.length + seedCityPlaces.length}, Memories: ${allMemories.length}`,
   );

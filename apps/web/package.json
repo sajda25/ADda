@@ -16,7 +16,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@memory-streets/shared": "workspace:*",
+    "@adda/shared": "workspace:*",
     "@prisma/client": "^6.19.0",
     "framer-motion": "^14.1.0",
     "leaflet": "^1.9.4",

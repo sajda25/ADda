@@ -20,7 +20,7 @@ describe("mural engine determinism", () => {
   });
 
   it("hashes identical strings stably", () => {
-    expect(hashString("memory-streets")).toBe(hashString("memory-streets"));
+    expect(hashString("adda")).toBe(hashString("adda"));
   });
 
   it("produces the same artwork hash for identical inputs", () => {

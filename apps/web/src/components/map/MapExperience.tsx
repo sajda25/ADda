@@ -13,7 +13,7 @@ import {
   type MemorySummary,
   type PlaceSummary,
   type TemporalLayer,
-} from "@memory-streets/shared";
+} from "@adda/shared";
 import { AddaLogo } from "@/components/layout/AddaLogo";
 import { RainOverlay } from "@/components/map/RainOverlay";
 import { MuralPanel } from "@/components/mural/MuralPanel";
