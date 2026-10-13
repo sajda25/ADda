@@ -78,7 +78,7 @@ export function MapExperience() {
   const reduce = useReducedMotion();
   const [places, setPlaces] = useState<PlaceSummary[]>([]);
   const [cities, setCities] = useState<CitySummary[]>([]);
-  const [cityId, setCityId] = useState(DEMO_CITIES[0].id);
+  const [cityId, setCityId] = useState<string>(DEMO_CITIES[0].id);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loadingPlaces, setLoadingPlaces] = useState(true);
   const [selectedPlaceId, setSelectedPlaceId] = useState<string | null>(null);
