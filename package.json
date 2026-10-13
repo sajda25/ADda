@@ -1,0 +1,21 @@
+{
+  "name": "memory-streets",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ADda — neighborhoods as living storybooks",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "start": "pnpm --filter web start",
+    "lint": "pnpm --filter web lint",
+    "seed": "pnpm --filter web seed",
+    "test": "pnpm --filter web test",
+    "db:generate": "pnpm --filter web db:generate",
+    "db:migrate": "pnpm --filter web db:migrate",
+    "db:push": "pnpm --filter web db:push"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.20.0"
+}

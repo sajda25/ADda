@@ -1,0 +1,269 @@
+// MEMORY STREETS — PostgreSQL read model
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TemporalLayer {
+  NOW
+  BEFORE_CHANGE
+  CHILDHOOD_CAMPUS
+}
+
+enum MemoryStatus {
+  DRAFT
+  PUBLISHED
+  HIDDEN
+  REMOVED
+}
+
+enum ModerationStatus {
+  CLEAR
+  REPORTED
+  UNDER_REVIEW
+  HIDDEN
+}
+
+enum RelationType {
+  ECHO
+  CONTINUATION
+  CONTRADICTION
+  TRANSFORM
+  RELATED
+}
+
+enum RelationStatus {
+  ACTIVE
+  SUGGESTED
+  REMOVED
+}
+
+enum ReportStatus {
+  OPEN
+  REVIEWED
+  DISMISSED
+  ACTIONED
+}
+
+model User {
+  id              String   @id @default(cuid())
+  walletAddress   String?  @unique
+  privyId         String?  @unique
+  displayName     String
+  cloakedDefault  Boolean  @default(false)
+  isDemo          Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  memories        Memory[]         @relation("MemoryAuthor")
+  relationsCreated MemoryRelation[] @relation("RelationCreator")
+  reports         Report[]
+}
+
+model Neighborhood {
+  id          String   @id
+  label       String
+  description String
+  centerLat   Float
+  centerLng   Float
+  isDemo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  places Place[]
+}
+
+model Place {
+  id              String   @id @default(cuid())
+  neighborhoodId  String
+  name            String
+  description     String
+  approxLat       Float
+  approxLng       Float
+  isDemo          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  neighborhood Neighborhood  @relation(fields: [neighborhoodId], references: [id], onDelete: Cascade)
+  memories     Memory[]
+  muralEpochs  MuralEpoch[]
+
+  @@index([neighborhoodId])
+  @@index([approxLat, approxLng])
+  @@unique([neighborhoodId, name])
+}
+
+model Memory {
+  id               String           @id @default(cuid())
+  placeId          String
+  authorId         String
+  title            String
+  text             String
+  layer            TemporalLayer
+  tags             String[]
+  status           MemoryStatus     @default(PUBLISHED)
+  moderationStatus ModerationStatus @default(CLEAR)
+  cloaked          Boolean          @default(false)
+  contentHash      String?
+  visibility       String           @default("PUBLIC")
+  reportCount      Int              @default(0)
+  /// Denormalized qualified unique-reader count for efficient ordering
+  readCount        Int              @default(0)
+  publishedAt      DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  onChain          Boolean          @default(false)
+  txHash           String?
+  isDemo           Boolean          @default(true)
+  cellId           String?
+
+  place     Place            @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  author    User             @relation("MemoryAuthor", fields: [authorId], references: [id])
+  reads     StoryRead[]
+  reports   Report[]
+  footnotes MemoryFootnote[]
+  livingPresences LivingPresence[]
+  relationsFrom MemoryRelation[] @relation("RelationSource")
+  relationsTo   MemoryRelation[] @relation("RelationTarget")
+
+  @@index([placeId, status, readCount(sort: Desc)])
+  @@index([placeId, publishedAt(sort: Desc)])
+  @@index([placeId, layer])
+  @@index([status, moderationStatus])
+  @@index([contentHash])
+}
+
+/// Reader answers when "the scrap reads you back"
+model MemoryFootnote {
+  id           String   @id @default(cuid())
+  memoryId     String
+  question     String
+  answer       String
+  /// Soft label — "a stranger", first name, etc. Never a login.
+  signedAs     String   @default("a stranger")
+  createdAt    DateTime @default(now())
+
+  memory Memory @relation(fields: [memoryId], references: [id], onDelete: Cascade)
+
+  @@index([memoryId, createdAt(sort: Desc)])
+}
+
+model MemoryRelation {
+  id             String         @id @default(cuid())
+  sourceMemoryId String
+  targetMemoryId String
+  relationType   RelationType
+  description    String?
+  createdById    String?
+  status         RelationStatus @default(ACTIVE)
+  createdAt      DateTime       @default(now())
+
+  sourceMemory Memory @relation("RelationSource", fields: [sourceMemoryId], references: [id], onDelete: Cascade)
+  targetMemory Memory @relation("RelationTarget", fields: [targetMemoryId], references: [id], onDelete: Cascade)
+  createdBy    User?  @relation("RelationCreator", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@unique([sourceMemoryId, targetMemoryId, relationType])
+  @@index([targetMemoryId])
+  @@index([sourceMemoryId, status])
+}
+
+model StoryRead {
+  id             String   @id @default(cuid())
+  memoryId       String
+  /// Privacy-safe reader / session identifier (hashed server-side)
+  readerKey      String
+  qualifiedAt    DateTime @default(now())
+  /// Calendar day bucket used for deduplication window (UTC YYYY-MM-DD)
+  dedupeBucket   String
+
+  memory Memory @relation(fields: [memoryId], references: [id], onDelete: Cascade)
+
+  @@unique([memoryId, readerKey, dedupeBucket])
+  @@index([memoryId, qualifiedAt])
+}
+
+model MuralEpoch {
+  id                    String   @id @default(cuid())
+  placeId               String
+  epochNumber           Int
+  seed                  String
+  contributingMemoryIds String[]
+  engineVersion         String
+  artworkHash           String
+  preservationScore     Float    @default(0)
+  fadeLevel             Float    @default(0)
+  txHash                String?
+  simulated             Boolean  @default(true)
+  createdAt             DateTime @default(now())
+
+  place Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@unique([placeId, epochNumber])
+  @@index([placeId, createdAt(sort: Desc)])
+}
+
+model Report {
+  id          String       @id @default(cuid())
+  memoryId    String
+  reporterId  String?
+  reason      String
+  status      ReportStatus @default(OPEN)
+  createdAt   DateTime     @default(now())
+
+  memory   Memory @relation(fields: [memoryId], references: [id], onDelete: Cascade)
+  reporter User?  @relation(fields: [reporterId], references: [id], onDelete: SetNull)
+
+  @@index([memoryId, status])
+}
+
+model TreasuryEvent {
+  id          String   @id @default(cuid())
+  placeId     String?
+  amountWei   String
+  purpose     String
+  donorKey    String?
+  txHash      String?  @unique
+  createdAt   DateTime @default(now())
+
+  @@index([placeId, createdAt])
+}
+
+/// A person temporarily becomes a place on the map (~1 hour)
+model LivingPresence {
+  id        String   @id @default(cuid())
+  memoryId  String
+  /// Soft public label — never a login
+  label     String
+  anchorLat Float
+  anchorLng Float
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  memory Memory         @relation(fields: [memoryId], references: [id], onDelete: Cascade)
+  notes  PresenceNote[]
+
+  @@index([expiresAt])
+  @@index([memoryId])
+}
+
+model PresenceNote {
+  id         String   @id @default(cuid())
+  presenceId String
+  body       String
+  signedAs   String   @default("a stranger")
+  createdAt  DateTime @default(now())
+
+  presence LivingPresence @relation(fields: [presenceId], references: [id], onDelete: Cascade)
+
+  @@index([presenceId, createdAt(sort: Desc)])
+}
+
+/// Idempotent seed bookkeeping
+model SeedMeta {
+  id        String   @id
+  version   String
+  appliedAt DateTime @default(now())
+}
