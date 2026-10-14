@@ -2,6 +2,8 @@ import { createHash } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { validatePublishMemory } from "@adda/shared";
 import { prisma } from "@/lib/db";
+import { explorerTxUrl } from "@/lib/chain";
+import { registerMemoryOnChain } from "@/lib/registerOnChain";
 
 const RATE_WINDOW_MS = 60_000;
 const RATE_MAX = 8;
@@ -102,6 +104,31 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    let onChain = false;
+    let txHash: string | null = null;
+    let explorerUrl: string | null = null;
+    let chainNotice: string | null = null;
+
+    const chainResult = await registerMemoryOnChain({
+      memoryId: memory.id,
+      contentHash,
+      placeId: memory.placeId,
+      layer: memory.layer,
+    });
+
+    if (chainResult.ok) {
+      onChain = true;
+      txHash = chainResult.txHash;
+      explorerUrl = chainResult.explorerUrl;
+      await prisma.memory.update({
+        where: { id: memory.id },
+        data: { onChain: true, txHash: chainResult.txHash },
+      });
+    } else {
+      chainNotice = `Saved off-chain for now (${chainResult.reason}).`;
+      console.warn("on-chain register skipped:", chainResult.reason);
+    }
+
     return NextResponse.json({
       ok: true,
       memory: {
@@ -109,7 +136,8 @@ export async function POST(request: NextRequest) {
         placeId: memory.placeId,
         title: memory.title,
         contentHash: memory.contentHash,
-        onChain: memory.onChain,
+        onChain,
+        txHash,
         publishedAt: memory.publishedAt?.toISOString(),
       },
       presence: {
@@ -117,8 +145,10 @@ export async function POST(request: NextRequest) {
         expiresAt: presence.expiresAt.toISOString(),
         label: presence.label,
       },
-      notice:
-        "Published — and you are now a place on the map for one hour. Strangers can leave notes on your shoulder.",
+      explorerUrl,
+      notice: onChain
+        ? `Published on Monad Testnet — and you are a place on the map for one hour. Tx: ${explorerUrl ?? explorerTxUrl(txHash!)}`
+        : `Published — you are a place on the map for one hour. ${chainNotice ?? ""}`.trim(),
     });
   } catch (error) {
     console.error("POST /api/memories/publish", error);

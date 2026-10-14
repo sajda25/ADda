@@ -202,13 +202,19 @@ export function PublishMemoryModal({
       const data = (await res.json()) as {
         error?: string;
         notice?: string;
-        memory?: { id: string };
+        explorerUrl?: string | null;
+        memory?: { id: string; onChain?: boolean; txHash?: string | null };
       };
       if (!res.ok) {
         setError(data.error ?? "Publication failed");
         return;
       }
-      setSuccess(data.notice ?? "Published.");
+      const chainBit = data.explorerUrl
+        ? ` On-chain: ${data.explorerUrl}`
+        : data.memory?.onChain
+          ? " Registered on Monad Testnet."
+          : "";
+      setSuccess((data.notice ?? "Published.") + chainBit);
       if (data.memory?.id) onPublished(data.memory.id);
     } catch {
       setError("Publication failed before the server confirmed success.");
